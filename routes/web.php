@@ -4,6 +4,7 @@ use App\Http\Controllers\FrontController;
 use App\Http\Controllers\LayoutsController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\MenuController;
 use App\Models\Pages;
 use App\Models\PagesTranslations;
 use App\Models\Settings;
@@ -92,7 +93,15 @@ Route::group(["prefix" => "admin", "middleware" => ["auth", "PreventBackHistory"
     Route::get("/settings", [SettingsController::class, 'create'])->name("setting.update");
     Route::post("/settings/update", [SettingsController::class, 'store'])->name("setting.store");
     
+
     // Settings End
+    Route::get("/menu", [MenuController::class, 'index'])->name("menu.all");
+    Route::get("/menu/create", [MenuController::class, 'create'])->name("menu.create");
+    Route::get("/menu/edit/{id}", [MenuController::class, 'edit'])->name("menu.edit");
+    Route::get("/menu/delete/{id}", [MenuController::class, 'delete'])->name("menu.delete");
+    Route::post("/menu/store", [MenuController::class, 'store'])->name("menu.store");
+    Route::post("/menu/update/{id}", [MenuController::class, 'update'])->name("menu.update");
+    Route::get("/menu/status/{id}", [MenuController::class, 'status'])->name("menu.status");
     // Layout Start
     Route::get("/layouts", [LayoutsController::class, 'index'])->name("layout.all");
     Route::get("/layouts/create", [LayoutsController::class, 'create'])->name("layout.create");
